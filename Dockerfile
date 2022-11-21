@@ -48,7 +48,7 @@ WORKDIR $ATHOME_WS
 RUN catkin config \
         --extend /opt/ros/${ROS_DISTRO} \
         --cmake-args -DCMAKE_BUILD_TYPE=Release \
-        && catkin build --no-status athome_navigation -j$(($(nproc)-1))
+        && catkin build --no-status athome_hardware -j$(($(nproc)-1))
 
 RUN echo "source $ATHOME_WS/devel/setup.bash" > /root/.bashrc
 COPY ros_entrypoint.sh /
