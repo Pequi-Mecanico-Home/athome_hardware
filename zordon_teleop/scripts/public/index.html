@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" />
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+<style>
+	table.center {
+		margin-left: auto;
+		margin-right: auto;
+	}
+	body {
+		text-align: center;
+	}
+	button {
+		width: 100%;
+		padding: 30px;
+	}
+</style>
+<script type="text/javascript">
+'use strict';
+$(document).ready(function() {
+	$('button').on('click', function(elem) {
+		let action_name = $(this).attr('name');
+		$.ajax({
+			type: "POST",
+			url: "/"+action_name
+		});
+	});
+});
+</script>
+</head>
+
+<body>
+  <table class="center">
+    <tr>
+      <td></td>
+      <td><button name="forward">Forward</button></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><button name="left" width="50%">Left</button></td>
+      <td><button name="stop">stop</button></td>
+      <td><button name="right">Right</button></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><button name="backward">Backward</button></td>
+      <td></td>
+    </tr>
+
+  </table>
+</body>
+</html>

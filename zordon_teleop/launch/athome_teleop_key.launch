@@ -1,0 +1,5 @@
+<launch>
+  <!-- athome_teleop_key already has its own built in velocity smoother -->
+  <node pkg="athome_teleop" type="athome_teleop_key" name="athome_teleop_keyboard"  output="screen">
+  </node>
+</launch>

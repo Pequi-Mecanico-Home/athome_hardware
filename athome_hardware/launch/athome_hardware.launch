@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<launch>
+  <arg name="respawn"                       default="true" />
+  <arg name="output"                        default="screen" />
+
+  <arg name="enable_joystick"               default="true" />
+  <arg name="enable_rplidar"                default="true" />
+  <arg name="enable_serial_sensors"         default="true" />
+  <arg name="enable_realsense_camera"       default="true" />
+  
+
+  <include if="$(arg enable_joystick)" file="$(find athome_teleop)/launch/athome_teleop_joy.launch">
+  </include>
+
+  <include if="$(arg enable_rplidar)" file="$(find rplidar_ros)/launch/rplidar.launch">
+  </include>
+
+  <include if="$(arg enable_serial_sensors)" file="$(find sensial_sensors)/launch/serial.launch">
+  </include>
+
+  <include if="$(arg enable_realsense_camera)" file="$(find realsense2_camera)/launch/rs_camera.launch">
+    <param name="align_depth" type="bool" value="true"/>
+  </include>
+
+</launch>
