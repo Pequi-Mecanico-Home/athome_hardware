@@ -3,6 +3,21 @@ FROM ros:melodic
 ENV ROS_DISTRO melodic
 ENV  PATH="$PATH:/usr/bin/python3"
 
+# install ROS Realsense pacakge
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        ca-certificates \
+        git \
+        build-essential \
+        cmake \
+        ninja-build \
+        software-properties-common \
+        ros-$ROS_DISTRO-realsense2-camera \
+        ros-$ROS_DISTRO-image-transport* \
+        ros-$ROS_DISTRO-rgbd-launch && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+    
 RUN apt -q -qq update && \
     DEBIAN_FRONTEND=noninteractive apt install -y \
     software-properties-common \
