@@ -1,0 +1,15 @@
+<launch>
+<!-- converter of JointState(/joint_states) Int16MultiArray(arm/cmd_position) -->
+  <node pkg="serial_sensors" name="rosserial_odom" type="odom.py" output="screen"></node>
+  <node pkg="serial_sensors" name="rosserial_cmd_vel" type="cmd_vel.py" output="screen"></node>
+  <node pkg="serial_sensors" name="rosserial_imu" type="imu.py" output="screen"></node>
+  <node pkg="serial_sensors" name="rosserial_tele" type="tele.py" output="screen"></node>
+  <node pkg="rosserial_python" type="serial_node.py" name="serial_node_IMU">
+    <param name="port" type="string" value="/dev/ttyACM0"/>
+    <param name="baud" type="int" value="250000"/>
+  </node>
+  <node pkg="rosserial_python" type="serial_node.py" name="serial_node_Odom">
+    <param name="port" type="string" value="/dev/ttyACM1"/>
+    <param name="baud" type="int" value="250000"/>
+  </node>
+</launch>
