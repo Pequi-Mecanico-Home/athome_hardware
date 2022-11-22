@@ -1,0 +1,53 @@
+ARG ROS_DISTRO=noetic
+
+FROM ros:$ROS_DISTRO
+
+ARG ROS_DISTRO
+ENV ROS_DISTRO=$ROS_DISTRO
+
+# install ROS Realsense pacakge
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        ca-certificates \
+        git \
+        build-essential \
+        cmake \
+        ninja-build \
+        software-properties-common \
+        ros-$ROS_DISTRO-realsense2-camera \
+        ros-$ROS_DISTRO-image-transport* \
+        ros-$ROS_DISTRO-rgbd-launch \
+        python3-rosinstall \
+        python3-catkin-tools \
+        python3-pip \
+        ros-$ROS_DISTRO-joy \
+        ros-$ROS_DISTRO-teleop-twist-joy \
+        ros-${ROS_DISTRO}-jsk-tools \
+        ros-${ROS_DISTRO}-rgbd-launch \
+        ros-${ROS_DISTRO}-image-transport-plugins \
+        ros-${ROS_DISTRO}-image-transport \
+        software-properties-common \
+        ros-${ROS_DISTRO}-rosserial-python \
+        wget \
+    && if [ ! -f "/usr/bin/python" ]; then \
+        ln -s /usr/bin/python3 /usr/bin/python; \
+    fi \
+    && rm -rf /var/lib/apt/lists/*
+
+
+ENV ATHOME_WS=/root/athome_ws
+COPY . $ATHOME_WS/src
+
+#build athome stack
+WORKDIR $ATHOME_WS
+RUN catkin config \
+        --extend /opt/ros/${ROS_DISTRO} \
+        --cmake-args -DCMAKE_BUILD_TYPE=Release \
+        && catkin build --no-status athome_hardware -j$(($(nproc)-1))
+
+RUN echo "source $ATHOME_WS/devel/setup.bash" > /root/.bashrc
+COPY ros_entrypoint.sh /
+
+WORKDIR $ATHOME_WS
+ENTRYPOINT ["/ros_entrypoint.sh"]
+CMD ["bash"]

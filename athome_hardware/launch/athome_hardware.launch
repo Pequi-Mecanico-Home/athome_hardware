@@ -15,7 +15,7 @@
   <include if="$(arg enable_rplidar)" file="$(find rplidar_ros)/launch/rplidar.launch">
   </include>
 
-  <include if="$(arg enable_serial_sensors)" file="$(find sensial_sensors)/launch/serial.launch">
+  <include if="$(arg enable_serial_sensors)" file="$(find serial_sensors)/launch/serial.launch">
   </include>
 
   <include if="$(arg enable_realsense_camera)" file="$(find realsense2_camera)/launch/rs_camera.launch">
