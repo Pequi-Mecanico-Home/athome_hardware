@@ -61,6 +61,7 @@
   <exec_depend>serial_sensors</exec_depend>
   <exec_depend>rplidar_ros</exec_depend>
   <exec_depend>athome_teleop</exec_depend>
+  <exec_depend>athome_description</exec_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
