@@ -4,6 +4,6 @@
   <include file="$(find athome_teleop)/launch/teleop.launch"/>
 
   <!-- Inicia script athome_teleop_joy -->
-  <!-- <node pkg="athome_teleop" type="athome_teleop_joy" name="athome_teleop_joystick"  output="screen">
-  </node> -->
+  <node pkg="athome_teleop" type="athome_teleop_joy" name="athome_teleop_joystick"  output="screen" respawn="true">
+  </node>
 </launch>

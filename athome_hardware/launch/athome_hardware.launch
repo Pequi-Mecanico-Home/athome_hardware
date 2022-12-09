@@ -7,10 +7,12 @@
   <arg name="enable_rplidar"                default="true" />
   <arg name="enable_serial_sensors"         default="true" />
   <arg name="enable_realsense_camera"       default="true" />
-  
+
+  <arg name="publish_tf"                    default="true"/>
+  <arg name="align_depth"                   default="true"/>
 
   <include if="$(arg enable_joystick)" file="$(find athome_teleop)/launch/athome_teleop_joy.launch">
-  </include>
+  </include> 
 
   <include if="$(arg enable_rplidar)" file="$(find rplidar_ros)/launch/rplidar.launch">
   </include>
@@ -19,7 +21,8 @@
   </include>
 
   <include if="$(arg enable_realsense_camera)" file="$(find realsense2_camera)/launch/rs_camera.launch">
-    <param name="align_depth" type="bool" value="true"/>
+      <arg name="publish_tf"             value="$(arg publish_tf)"/>
+      <arg name="align_depth"            value="$(arg align_depth)"/>
   </include>
 
 </launch>
