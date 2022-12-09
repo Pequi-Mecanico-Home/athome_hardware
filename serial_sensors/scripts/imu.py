@@ -22,6 +22,7 @@ def callback(data):
 def talker():
 	global pubPosition, rate
 	pubPosition = rospy.Publisher('IMU', Imu, queue_size=1)
+	rospy.init_node('rosserial_imu', anonymous=True)
 	rospy.Subscriber("micro/IMU", Imu, callback, queue_size=1)
 	rate = rospy.Rate(5)
 	rospy.spin()
